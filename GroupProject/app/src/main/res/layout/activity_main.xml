@@ -23,7 +23,7 @@
         android:id="@+id/btnSnake"
         android:layout_width="228dp"
         android:layout_height="65dp"
-        android:text="Snake"
+        android:text="@string/snakeButton"
         android:textSize="20sp"
         android:background="@color/buttonColor"
         android:onClick="onSnakeClick"

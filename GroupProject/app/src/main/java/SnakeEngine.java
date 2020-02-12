@@ -14,6 +14,6 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 
-//class SnakeEngine extends SurfaceView implements Runnable {
-//
-//}
+  class SnakeEngine extends SurfaceView implements Runnable {
+      
+  }

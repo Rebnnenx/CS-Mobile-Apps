@@ -12,7 +12,7 @@ import android.view.Display;
 public class SnakeGame extends AppCompatActivity {
 
     //creates an instance of snake engine
-   // SnakeEngine snakeEngine;
+    SnakeEngine snakeEngine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,22 +27,22 @@ public class SnakeGame extends AppCompatActivity {
             display.getSize(size);
 
             // Create an instance of SnakeEngine class
-          //  snakeEngine = new SnakeEngine(this, size);
+            snakeEngine = new SnakeEngine(this, size);
 
             // Set snakeEngine to the view of Activity
-         //   setContentView(snakeEngine);
+            setContentView(snakeEngine);
     }
 
-//    @Override
-//    protected void resume() {
-//        super.resume();
-//        snakeEngine.Resume();
-//    }
-//
-//    @Override
-//    protected void pause() {
-//        super.pause();
-//        snakeEngine.pause();
-//    }
+    @Override
+    protected void resume() {
+        super.resume();
+        snakeEngine.Resume();
+    }
+
+    @Override
+    protected void pause() {
+        super.pause();
+        snakeEngine.pause();
+    }
 
 }
