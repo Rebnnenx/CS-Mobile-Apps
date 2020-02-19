@@ -40,32 +40,43 @@ public class MainActivity extends AppCompatActivity {
                 public void onClick(View btn){
                     output.setText("");
 
-                    int intQuarters;
-                    int intDimes;
-                    int intNickles;
-                    int intPennies;
-                    int intTotal;
-                    int intDollars;
-                    int intCents;
+                    int intQuarters = 0;
+                    int intDimes = 0;
+                    int intNickles = 0;
+                    int intPennies = 0;
+                    int intTotal = 0;
+                    int intDollars = 0;
+                    int intCents = 0;
+                    boolean isValid = true;
 
-                    intQuarters = Integer.parseInt(quarters.getText().toString());
-                    intDimes = Integer.parseInt(dimes.getText().toString());
-                    intNickles = Integer.parseInt(nickles.getText().toString());
-                    intPennies = Integer.parseInt(pennies.getText().toString());
+                    try{
+                        intQuarters = Integer.parseInt(quarters.getText().toString());
+                        intDimes = Integer.parseInt(dimes.getText().toString());
+                        intNickles = Integer.parseInt(nickles.getText().toString());
+                        intPennies = Integer.parseInt(pennies.getText().toString());
+                    }
+                    catch ( NumberFormatException e){
+                        isValid=false;
+                    }
 
-                    //Perform division
-                    intTotal = (intQuarters * 25) + (intDimes * 10) + (intNickles * 5) + (intPennies * 1);
+                    if (isValid){
+                        //Perform division
+                        intTotal = (intQuarters * 25) + (intDimes * 10) + (intNickles * 5) + (intPennies * 1);
 
-                    intDollars = intTotal / 100;
+                        intDollars = intTotal / 100;
 
-                    intCents = intTotal % 100;
+                        intCents = intTotal % 100;
 
-                    String strName = name.getText().toString();
+                        String strName = name.getText().toString();
 
 
-                    //Output our final text
-                    output.setText("Hello " + strName + "\nYour coins are worth " +
-                            intDollars + " dollars and " + intCents + " cents. Bye!");
+                        //Output our final text
+                        output.setText("Hello " + strName + "\nYour coins are worth " +
+                                intDollars + " dollars and " + intCents + " cents. Bye!");
+                    }
+                    else {
+                        output.setText("One or more of the inputted numbers is not valid. \nPlease make sure you only submit whole numbers");
+                    }
 
                 }
 
