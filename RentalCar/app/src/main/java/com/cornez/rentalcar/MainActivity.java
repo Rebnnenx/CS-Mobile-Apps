@@ -35,9 +35,10 @@ public class MainActivity extends AppCompatActivity {
          insurance = (Switch) findViewById(R.id.swInsurance);
          gas = (Switch) findViewById(R.id.swGas);
          days = (SeekBar) findViewById(R.id.skDays);
+         output = findViewById(R.id.txtOutput);
 
         //Update button name (btnCalc)
-        Button calculate = (Button) findViewById(R.id.btnCalc);
+        Button calculate = (Button) findViewById(R.id.btnCalculate);
 
         calculate.setOnClickListener(getTotal);
     }
@@ -50,42 +51,43 @@ public class MainActivity extends AppCompatActivity {
 
                     //Get all variable values from the components here
 
-                     int driversNum = driverNum.placeholder;
-                     String modelVal = model.placeholder;
-                     Boolean uninsured = insurance.placeholder;
-                     Boolean prepayGas = gas.placeholder;
-                     int rentalDays = days.placeholder;
+
+                     String modelVal = model.toString();
+                     Boolean uninsured = insurance.isChecked();
+                     Boolean prepayGas = gas.isChecked();
+                     int rentalDays = days.getProgress();
 
                     boolean isValid = true;
-
+                    int driversNum =0;
                     try{
-                        //Get the number of drivers, update quarters name
-                        //driversNum = Integer.parseInt(quarters.getText().toString());
+                        driversNum = Integer.parseInt(driverNum.getText().toString());
+
+                        if(driversNum <= 0) {
+                            isValid = false;
+                        }
                     }
                     catch ( NumberFormatException e){
                         isValid=false;
                     }
 
-                    if(driversNum <= 0) {
-                        isValid = false;
-                    }
+
 
                     if (isValid){
-                        //if modelVal == 'Jeep Wrangler'
-                            //total += 55 * rentalDays
-                        //else if modelVal == 'Jeep Grand Cherokee'
-                            //total += 85 * rentalDays
-                        //else
-                            //total += 125 * rentalDays
+                        if (modelVal == "Jeep Wrangler")
+                            total += 55 * rentalDays;
+                        else if (modelVal == "Jeep Grand Cherokee")
+                            total += 85 * rentalDays;
+                        else
+                            total += 125 * rentalDays;
 
-                        //if driversNum > 1
-                            //total += 22 * rentalDays
+                        if (driversNum > 1)
+                            total += 22 * rentalDays;
 
-                        //if prepayGas is checked:
-                            //total += 52;
+                        if (prepayGas)
+                            total += 52;
 
-                        //if uninsured is checked:
-                            //total += 24 * rentalDays;
+                        if (uninsured)
+                            total += 24 * rentalDays;
 
                         output.setText("The total cost of renting this car for " + rentalDays + "days is: $" + total + ".");
                     }
