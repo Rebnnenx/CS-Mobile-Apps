@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
         //Update names for each variable declared earlier
         //Format: varName = (whateverType) findViewById(R.id.referenceName);
         //e.g. output = (TextView) findViewById(R.id.outputBox);
-        // driverNum = (placeholder) findViewById(R.id.placeholder);
-        // model = (placeholder) findViewById(R.id.placeholder);
-        // insurance = (placeholder) findViewById(R.id.placeholder);
-        // gas = (placeholder) findViewById(R.id.placeholder);
-        // days = (placeholder) findViewById(R.id.placeholder);
+         driverNum = (TextView) findViewById(R.id.txtDrivers);
+         model = (Spinner) findViewById(R.id.spnVehicles);
+         insurance = (Switch) findViewById(R.id.swInsurance);
+         gas = (Switch) findViewById(R.id.swGas);
+         days = (SeekBar) findViewById(R.id.skDays);
 
         //Update button name (btnCalc)
         Button calculate = (Button) findViewById(R.id.btnCalc);
@@ -47,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
                     double total = 0;
 
                     //Get all variable values from the components here
-                    //e.g. int quarters = quarterBox.getText();
-                    // int driversNum = driverNum.placeholder;
-                    // String modelVal = model.placeholder;
-                    // Boolean uninsured = insurance.placeholder;
-                    // Boolean prepayGas = gas.placeholder;
-                    // int rentalDays = days.placeholder;
+
+                     int driversNum = driverNum.placeholder;
+                     String modelVal = model.placeholder;
+                     Boolean uninsured = insurance.placeholder;
+                     Boolean prepayGas = gas.placeholder;
+                     int rentalDays = days.placeholder;
 
                     boolean isValid = true;
 
