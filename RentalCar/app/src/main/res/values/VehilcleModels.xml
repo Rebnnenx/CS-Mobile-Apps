@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="VehicleModels">
+        <item name= "wrangler">Jeep Wrangler ($55 per day)</item>
+        <item name ="cherokee">Jeep Grand Cherokee ($85 per day)</item>
+        <item name = "rover">Land Rover ($125 per day)</item>
+
+    </string-array>
+</resources>
