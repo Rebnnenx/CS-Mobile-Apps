@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -13,11 +15,11 @@ public class MainActivity extends AppCompatActivity {
     //Update names for all the components
     //Format is: private whateverType varName;
     private TextView output;
-    // private placeholder driverNum;
-    // private placeholder model
-    // private placeholder insurance
-    // private placeholder gas
-    // private placeholder days
+    private TextView driverNum;
+    private Spinner model;
+    private Switch insurance;
+    private Switch gas;
+    private SeekBar days;
 
 
     @Override
