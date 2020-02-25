@@ -50,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
                     double total = 0;
 
                     //Get all variable values from the components here
-
-
-                     String modelVal = model.toString();
+                     String modelVal = model.getSelectedItem().toString();
+                     System.out.println((model.getSelectedItem()));
+                    System.out.println(modelVal);
                      Boolean uninsured = insurance.isChecked();
                      Boolean prepayGas = gas.isChecked();
                      int rentalDays = days.getProgress();
@@ -70,12 +70,10 @@ public class MainActivity extends AppCompatActivity {
                         isValid=false;
                     }
 
-
-
                     if (isValid){
-                        if (modelVal == "Jeep Wrangler")
+                        if (modelVal.contains("Wrangler"))
                             total += 55 * rentalDays;
-                        else if (modelVal == "Jeep Grand Cherokee")
+                        else if (modelVal.contains("Grand"))
                             total += 85 * rentalDays;
                         else
                             total += 125 * rentalDays;
@@ -89,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
                         if (uninsured)
                             total += 24 * rentalDays;
 
-                        output.setText("The total cost of renting this car for " + rentalDays + "days is: $" + total + ".");
+                        output.setText("The total cost of renting this car for " + rentalDays + " days is: $" + total + ".");
                     }
                     else {
                         output.setText("The inputted number of drivers is not valid. \nPlease make sure you only submit whole positive numbers");
