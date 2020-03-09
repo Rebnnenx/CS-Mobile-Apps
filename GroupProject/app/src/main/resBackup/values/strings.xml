@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">The Jungle</string>
+    <string name="title">Welcome to the Jungle</string>
+    <string name="snakeButton">Snake</string>
+</resources>
