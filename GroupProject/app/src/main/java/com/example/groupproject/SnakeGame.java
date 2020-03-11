@@ -33,7 +33,7 @@ public class SnakeGame extends AppCompatActivity {
     Bitmap tailBitmap;
     Bitmap appleBitmap;
 
-//NOTE Replace with our new sound effects and add music?
+    //NOTE Replace with our new sound effects and add music?
     //initializes the sound variables
     private SoundPool soundPool;
     int appleSound = -1; //Getting apple sound effect
@@ -184,8 +184,12 @@ public class SnakeGame extends AppCompatActivity {
             if(dead){
                 //restarts the game
                 soundPool.play(deathSound, 1, 1, 0, 0, 1);
-                score = 0;
-                getSnake();
+                //score = 0;
+                //getSnake();
+
+                //Adding game over screen
+                Intent gameOverIntent = new Intent(getBaseContext(), GameOver.class);
+                startActivity(gameOverIntent);
 
             }
 
@@ -260,7 +264,7 @@ public class SnakeGame extends AppCompatActivity {
             ourThread.start();
         }
 
-//NOTE We might need to fix the game controls in this method? Doesn't work well with mouse, we need to test it on an actual phone
+        //NOTE We might need to fix the game controls in this method? Doesn't work well with mouse, we need to test it on an actual phone
         //Adds the game controls
         @Override
         public boolean onTouchEvent(MotionEvent motionEvent) {
@@ -331,7 +335,7 @@ public class SnakeGame extends AppCompatActivity {
         return false;
     }
 
-//NOTE Replace the sound effects with our own ones
+    //NOTE Replace the sound effects with our own ones
     //Loads in the sounds from the resource manager
     public void loadSound(){
         soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
@@ -346,7 +350,7 @@ public class SnakeGame extends AppCompatActivity {
 
             descriptor = assetManager.openFd("deathSound.ogg");
             deathSound = soundPool.load(descriptor, 0);
-        //Catches the cases where the sounds don't load
+            //Catches the cases where the sounds don't load
         } catch (IOException e) {
             //Print an error message to the console
             Log.e("error", "failed to load sound files");
