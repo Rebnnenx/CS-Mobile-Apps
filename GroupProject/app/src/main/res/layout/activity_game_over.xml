@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/txtGameOver"
-        android:layout_width="161dp"
-        android:layout_height="91dp"
+        android:layout_width="163dp"
+        android:layout_height="152dp"
         android:layout_marginStart="124dp"
         android:layout_marginLeft="124dp"
         android:text="Game Over"
