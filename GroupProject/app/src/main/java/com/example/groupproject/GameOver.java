@@ -20,7 +20,16 @@ public class GameOver extends AppCompatActivity {
         home = (Button) findViewById(R.id.btnHome);
         playAgain = (Button) findViewById(R.id.btnPlayAgain);
 
+    }
 
+    public void onPlayAgainClick(View v){
+        Intent PlayAgainIntent = new Intent(getBaseContext(),   SnakeGame.class);
+        startActivity(PlayAgainIntent);
+    }
+
+    public void onHomeClick(View v){
+        Intent HomeIntent = new Intent(getBaseContext(),   MainActivity.class);
+        startActivity(HomeIntent);
     }
 
 }

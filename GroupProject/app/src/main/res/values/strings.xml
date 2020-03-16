@@ -2,4 +2,8 @@
     <string name="app_name">The Jungle</string>
     <string name="title">Welcome to the Jungle</string>
     <string name="snakeButton">Snake</string>
+    <string name="gameOver">Game Over</string>
+    <string name="pause">Pause</string>
+    <string name="home">Home</string>
+    <string name="playAgain">Play Again</string>
 </resources>
