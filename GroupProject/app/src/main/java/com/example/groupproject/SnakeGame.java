@@ -188,7 +188,9 @@ public class SnakeGame extends AppCompatActivity {
                 //getSnake();
 
                 //Adding game over screen
+                String strScore = Integer.toString(score);
                 Intent gameOverIntent = new Intent(getBaseContext(), GameOver.class);
+                gameOverIntent.putExtra("Score", strScore);
                 startActivity(gameOverIntent);
 
             }
