@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TaxCalculator</string>
+    <string name="Filing_status">Filing Status:</string>
+    <string name="Single">Single</string>
+    <string name="Married_Joint">Married Filing Jointly</string>
+    <string name="Married_Separately">Married Filing Separately</string>
+    <string name="Head">Head of Household</string>
+    <string name="Calculate">Calculate Tax</string>
+    <string name="Tax">Taxable Income:</string>
+</resources>
