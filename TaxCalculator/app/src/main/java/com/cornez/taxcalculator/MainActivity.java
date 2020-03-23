@@ -8,6 +8,8 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,21 +23,24 @@ public class MainActivity extends AppCompatActivity {
     private EditText income;
     private double taxableIncome;
     private double tax;
+    private String taxFormat;
     private boolean isValid;
+    private NumberFormat formatter;
+    private DecimalFormat df;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button calc = (Button) findViewById((R.id.btnCalc));
-        TextView output = (TextView) findViewById(R.id.EditTxtTaxIncome);
-        RadioGroup status = (RadioGroup) findViewById((R.id.radGrpFilingStatus));
-        RadioButton single = (RadioButton) findViewById(R.id.radSingle);
-        RadioButton marriedJoint = (RadioButton) findViewById(R.id.radMarriedJoint);
-        RadioButton marriedSeparate = (RadioButton) findViewById(R.id.radMarriedSeparete);
-        RadioButton head = (RadioButton) findViewById(R.id.radHead);
-        EditText income = (EditText) findViewById(R.id.EditTxtTaxIncome);
+        calc = (Button) findViewById((R.id.btnCalc));
+        output = (TextView) findViewById(R.id.txtVOutput);
+        status = (RadioGroup) findViewById((R.id.radGrpFilingStatus));
+        single = (RadioButton) findViewById(R.id.radSingle);
+        marriedJoint = (RadioButton) findViewById(R.id.radMarriedJoint);
+        marriedSeparate = (RadioButton) findViewById(R.id.radMarriedSeparete);
+        head = (RadioButton) findViewById(R.id.radHead);
+        income = (EditText) findViewById(R.id.EditTxtTaxIncome);
 
         calc.setOnClickListener(calculate);
     }
@@ -70,13 +75,13 @@ public class MainActivity extends AppCompatActivity {
 
                         if(single.isChecked()) {
                             if (taxableIncome > 49300)
-                                tax = 11159.50 + (taxableIncome - 49300) * .31;
+                                tax = 11158.50 + (taxableIncome - 49300) * .31;
                             else
                                 tax = 0;
                         }
                         else if (marriedJoint.isChecked()) {
                             if (taxableIncome > 34000 && taxableIncome < 82150)
-                                tax = 51000 + (taxableIncome - 34000) * .28;
+                                tax = 5100 + (taxableIncome - 34000) * .28;
                             else if (taxableIncome > 82150)
                                 tax = 18582 + (taxableIncome - 82150) * .31;
                             else
@@ -98,8 +103,12 @@ public class MainActivity extends AppCompatActivity {
                         }else
                             isValid = false;
 
-                    if(isValid)
-                        output.setText("$" + Double.toString(tax));
+                    if(isValid) {
+
+                        NumberFormat formatter = new DecimalFormat("#,###.##");
+                        taxFormat = formatter.format(tax);
+                        output.setText("Tax Total: $" + taxFormat);
+                    }
                     else
                         output.setText("Invalid Input, Please select a Status");
                     }
