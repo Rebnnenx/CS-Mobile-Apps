@@ -29,9 +29,19 @@ public class SnakeGame extends AppCompatActivity {
     Canvas canvas;
     SnakeView snakeView;
     Bitmap headBitmap;
+    Bitmap headBitmapR;
+    Bitmap headBitmapU;
+    Bitmap headBitmapD;
     Bitmap bodyBitmap;
+    Bitmap bodyBitmapR;
+    Bitmap bodyBitmapU;
+    Bitmap bodyBitmapD;
     Bitmap tailBitmap;
+    Bitmap tailBitmapR;
+    Bitmap tailBitmapU;
+    Bitmap tailBitmapD;
     Bitmap appleBitmap;
+    Bitmap backgroundBitmap;
 
     //NOTE Replace with our new sound effects and add music?
     //initializes the sound variables
@@ -39,7 +49,7 @@ public class SnakeGame extends AppCompatActivity {
     int appleSound = -1; //Getting apple sound effect
     int deathSound = -1; //Death sound
 
-    //sets the initial direction for the snake
+    //sets the initial direction for the squirrel
     int directionOfTravel=0;
     //0 is up, 1 is right, 2 is down, 3 is left
 
@@ -59,6 +69,7 @@ public class SnakeGame extends AppCompatActivity {
     int blockSize;
     int numBlocksWide;
     int numBlocksHigh;
+    boolean paused = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,20 +98,20 @@ public class SnakeGame extends AppCompatActivity {
             ourHolder = getHolder();
             paint = new Paint();
 
-            //Sets an Integer array for the snake segments
+            //Sets an Integer array for the squirrel segments
             snakeX = new int[200];
             snakeY = new int[200];
 
-            //initializes the snake
+            //initializes the squirrel
             getSnake();
             //initializes the first apple
             getApple();
         }
 
         public void getSnake(){
-            //initializes the starting length of the snake
+            //initializes the starting length of the squirrel
             snakeLength = 3;
-            //starts the snake in the middle of screen
+            //starts the squirrel in the middle of screen
             snakeX[0] = numBlocksWide/2;
             snakeY[0] = numBlocksHigh /2;
             snakeX[1] = snakeX[0]-1;
@@ -129,9 +140,9 @@ public class SnakeGame extends AppCompatActivity {
         //Updates on each frame
         public void updateGame() {
 
-            //Checks if the snake is touching an apple
+            //Checks if the squirrel is touching an apple
             if(snakeX[0] == appleX && snakeY[0] == appleY){
-                //grows the snake
+                //grows the squirrels
                 snakeLength++;
                 //replaces the apple
                 getApple();
@@ -173,7 +184,7 @@ public class SnakeGame extends AppCompatActivity {
             if(snakeX[0] >= numBlocksWide)dead=true;
             if(snakeY[0] == -1)dead=true;
             if(snakeY[0] == numBlocksHigh)dead=true;
-            //Checks snake collision with itself
+            //Checks squirrel collision with itself
             for (int i = snakeLength-1; i > 0; i--) {
                 if ((i > 4) && (snakeX[0] == snakeX[i]) && (snakeY[0] == snakeY[i])) {
                     dead = true;
@@ -203,30 +214,129 @@ public class SnakeGame extends AppCompatActivity {
             if (ourHolder.getSurface().isValid()) {
                 canvas = ourHolder.lockCanvas();
                 canvas.drawColor(Color.BLACK);//the background
+                canvas.drawBitmap(backgroundBitmap,0,0,paint);
                 paint.setColor(Color.argb(255, 255, 255, 255));
                 paint.setTextSize(topGap/2);
-                canvas.drawText("Score:" + score + "  Hi:" + hi, 10, topGap-6, paint);
+                canvas.drawText("Score:" + score + "  Hi:" + hi, 10, (float)(topGap * .75), paint);
+                canvas.drawText("❚❚", (float)(screenWidth * .90), (float)(topGap * .75), paint);
 
                 //draws a border
                 paint.setStrokeWidth(3);//4 pixel border
                 canvas.drawLine(1,topGap,screenWidth-1,topGap,paint);
-                canvas.drawLine(screenWidth-1,topGap,screenWidth-1,topGap+(numBlocksHigh*blockSize),paint);
-                canvas.drawLine(screenWidth-1,topGap+(numBlocksHigh*blockSize),1,topGap+(numBlocksHigh*blockSize),paint);
-                canvas.drawLine(1,topGap, 1,topGap+(numBlocksHigh*blockSize), paint);
+//                canvas.drawLine(screenWidth-1,topGap,screenWidth-1,topGap+(numBlocksHigh*blockSize),paint);
+//                canvas.drawLine(screenWidth-1,topGap+(numBlocksHigh*blockSize),1,topGap+(numBlocksHigh*blockSize),paint);
+//                canvas.drawLine(1,topGap, 1,topGap+(numBlocksHigh*blockSize), paint);
 
-                //draws the snake
-                canvas.drawBitmap(headBitmap, snakeX[0]*blockSize, (snakeY[0]*blockSize)+topGap, paint);
-                //Draws the body
-                for(int i = 1; i < snakeLength-1;i++){
-                    canvas.drawBitmap(bodyBitmap, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                //0 is up, 1 is right, 2 is down, 3 is left
+
+                if(directionOfTravel == 0) {
+                    canvas.drawBitmap(headBitmapU, snakeX[0]*blockSize, (snakeY[0]*blockSize)+topGap, paint);
+                    for(int i = 1; i < snakeLength-1;i++){
+                        if (snakeX[i] == snakeX[i-1] && snakeY[i-1] == snakeY[i] + 1)
+                            canvas.drawBitmap(bodyBitmapD, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else if (snakeX[i] == snakeX[i-1] && snakeY[i-1] == snakeY[i] - 1)
+                            canvas.drawBitmap(bodyBitmapU, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else if (snakeY[i] == snakeY[i-1] && snakeX[i-1] == snakeX[i] - 1)
+                            canvas.drawBitmap(bodyBitmap, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else if (snakeY[i] == snakeY[i-1] && snakeX[i-1] == snakeX[i] + 1)
+                            canvas.drawBitmap(bodyBitmapR, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else
+                            canvas.drawBitmap(bodyBitmapU, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                    }
+                    if (snakeX[snakeLength-1] == snakeX[snakeLength] && snakeY[snakeLength] == snakeY[snakeLength-1] + 1)
+                        canvas.drawBitmap(tailBitmapU, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else if (snakeX[snakeLength-1] == snakeX[snakeLength] && snakeY[snakeLength] == snakeY[snakeLength])
+                        canvas.drawBitmap(tailBitmapD, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else if (snakeY[snakeLength-1] == snakeY[snakeLength] && snakeX[snakeLength] == snakeX[snakeLength-1] - 1)
+                        canvas.drawBitmap(tailBitmapR, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else if (snakeY[snakeLength-1] == snakeY[snakeLength] && snakeX[snakeLength] == snakeX[snakeLength-1] + 1)
+                        canvas.drawBitmap(tailBitmap, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else
+                        canvas.drawBitmap(tailBitmapU, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
                 }
-                //draws the tail
-                canvas.drawBitmap(tailBitmap, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                else if(directionOfTravel == 1) {
+                    canvas.drawBitmap(headBitmapR, snakeX[0]*blockSize, (snakeY[0]*blockSize)+topGap, paint);
+                    for(int i = 1; i < snakeLength-1;i++){
+                        if (snakeX[i] == snakeX[i-1] && snakeY[i-1] == snakeY[i] + 1)
+                            canvas.drawBitmap(bodyBitmapD, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else if (snakeX[i] == snakeX[i-1] && snakeY[i-1] == snakeY[i] - 1)
+                            canvas.drawBitmap(bodyBitmapU, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else if (snakeY[i] == snakeY[i-1] && snakeX[i-1] == snakeX[i] - 1)
+                            canvas.drawBitmap(bodyBitmap, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else if (snakeY[i] == snakeY[i-1] && snakeX[i-1] == snakeX[i] + 1)
+                            canvas.drawBitmap(bodyBitmapR, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else
+                            canvas.drawBitmap(bodyBitmapR, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                    }
+                    if (snakeX[snakeLength-1] == snakeX[snakeLength] && snakeY[snakeLength] == snakeY[snakeLength-1] + 1)
+                        canvas.drawBitmap(tailBitmapU, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else if (snakeX[snakeLength-1] == snakeX[snakeLength] && snakeY[snakeLength] == snakeY[snakeLength])
+                        canvas.drawBitmap(tailBitmapD, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else if (snakeY[snakeLength-1] == snakeY[snakeLength] && snakeX[snakeLength] == snakeX[snakeLength-1] - 1)
+                        canvas.drawBitmap(tailBitmapR, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else if (snakeY[snakeLength-1] == snakeY[snakeLength] && snakeX[snakeLength] == snakeX[snakeLength-1] + 1)
+                        canvas.drawBitmap(tailBitmap, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else
+                        canvas.drawBitmap(tailBitmapR, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                }
+                else if(directionOfTravel == 2) {
+                    canvas.drawBitmap(headBitmapD, snakeX[0]*blockSize, (snakeY[0]*blockSize)+topGap, paint);
+                    for(int i = 1; i < snakeLength-1;i++){
+                        if (snakeX[i] == snakeX[i-1] && snakeY[i-1] == snakeY[i] + 1)
+                            canvas.drawBitmap(bodyBitmapD, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else if (snakeX[i] == snakeX[i-1] && snakeY[i-1] == snakeY[i] - 1)
+                            canvas.drawBitmap(bodyBitmapU, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else if (snakeY[i] == snakeY[i-1] && snakeX[i-1] == snakeX[i] - 1)
+                            canvas.drawBitmap(bodyBitmap, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else if (snakeY[i] == snakeY[i-1] && snakeX[i-1] == snakeX[i] + 1)
+                            canvas.drawBitmap(bodyBitmapR, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else
+                            canvas.drawBitmap(bodyBitmapD, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                    }
+                    if (snakeX[snakeLength-1] == snakeX[snakeLength] && snakeY[snakeLength] == snakeY[snakeLength-1] + 1)
+                        canvas.drawBitmap(tailBitmapU, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else if (snakeX[snakeLength-1] == snakeX[snakeLength] && snakeY[snakeLength] == snakeY[snakeLength])
+                        canvas.drawBitmap(tailBitmapD, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else if (snakeY[snakeLength-1] == snakeY[snakeLength] && snakeX[snakeLength] == snakeX[snakeLength-1] - 1)
+                        canvas.drawBitmap(tailBitmapR, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else if (snakeY[snakeLength-1] == snakeY[snakeLength] && snakeX[snakeLength] == snakeX[snakeLength-1] + 1)
+                        canvas.drawBitmap(tailBitmap, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else
+                        canvas.drawBitmap(tailBitmapD, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                }
+                else{
+                    canvas.drawBitmap(headBitmap, snakeX[0]*blockSize, (snakeY[0]*blockSize)+topGap, paint);
+                    for(int i = 1; i < snakeLength-1;i++){
+                        if (snakeX[i] == snakeX[i-1] && snakeY[i-1] == snakeY[i] + 1)
+                            canvas.drawBitmap(bodyBitmapD, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else if (snakeX[i] == snakeX[i-1] && snakeY[i-1] == snakeY[i] - 1)
+                            canvas.drawBitmap(bodyBitmapU, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else if (snakeY[i] == snakeY[i-1] && snakeX[i-1] == snakeX[i] - 1)
+                            canvas.drawBitmap(bodyBitmap, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else if (snakeY[i] == snakeY[i-1] && snakeX[i-1] == snakeX[i] + 1)
+                            canvas.drawBitmap(bodyBitmapR, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                        else
+                            canvas.drawBitmap(bodyBitmap, snakeX[i]*blockSize, (snakeY[i]*blockSize)+topGap, paint);
+                    }
+                    if (snakeX[snakeLength-1] == snakeX[snakeLength] && snakeY[snakeLength] == snakeY[snakeLength-1] + 1)
+                        canvas.drawBitmap(tailBitmapU, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else if (snakeX[snakeLength-1] == snakeX[snakeLength] && snakeY[snakeLength] == snakeY[snakeLength])
+                        canvas.drawBitmap(tailBitmapD, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else if (snakeY[snakeLength-1] == snakeY[snakeLength] && snakeX[snakeLength] == snakeX[snakeLength-1] - 1)
+                        canvas.drawBitmap(tailBitmapR, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else if (snakeY[snakeLength-1] == snakeY[snakeLength] && snakeX[snakeLength] == snakeX[snakeLength-1] + 1)
+                        canvas.drawBitmap(tailBitmap, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                    else
+                        canvas.drawBitmap(tailBitmap, snakeX[snakeLength-1]*blockSize, (snakeY[snakeLength-1]*blockSize)+topGap, paint);
+                }
 
                 //draws the apple
                 canvas.drawBitmap(appleBitmap, appleX*blockSize, (appleY*blockSize)+topGap, paint);
 
                 ourHolder.unlockCanvasAndPost(canvas);
+
+                if(paused)
+                    canvas.drawText("Paused" + hi, screenWidth / 2, screenHeight / 2, paint);
             }
 
         }
@@ -273,7 +383,17 @@ public class SnakeGame extends AppCompatActivity {
 
             switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_UP:
-                    if (motionEvent.getX() >= screenWidth / 2) {
+                    if (motionEvent.getX() >= screenWidth * .90 && (motionEvent.getY() <= topGap * .75))
+                        if(paused){
+                            onResume();
+                            paused = false;
+                        }
+                        else {
+                            canvas.drawText("Paused" + hi, screenWidth / 2, screenHeight / 2, paint);
+                            paused = true;
+                            onPause();
+                        }
+                    else if (motionEvent.getX() >= screenWidth / 2) {
                         //turn right
                         directionOfTravel ++;
                         if(directionOfTravel == 4) {//no such direction
@@ -371,22 +491,48 @@ public class SnakeGame extends AppCompatActivity {
         topGap = screenHeight/14;
 
         //sets the pixel size in the game to the phone's scale
-        blockSize = screenWidth/40;
+        blockSize = screenWidth/40 * 4;
         //Leaves one pixel for the score at the top
-        numBlocksWide = 40;
-        numBlocksHigh = ((screenHeight - topGap ))/blockSize;
+        numBlocksWide = 40 / 4;
+        double blocksHigh = ((screenHeight - (topGap + 5) ))/ blockSize;
+        if(blocksHigh % 1 > 0) {
+            numBlocksHigh = (int)blocksHigh - 1;
+        }
+        else {
+            numBlocksHigh = (int)blocksHigh - 1;
+        }
 
 //NOTE Replace with our own images that use the same name and resolutions
         //loads and scales all of the bitmaps
+        backgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.background);
         headBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.head);
+        headBitmapR = BitmapFactory.decodeResource(getResources(), R.drawable.head_r);
+        headBitmapU = BitmapFactory.decodeResource(getResources(), R.drawable.head_u);
+        headBitmapD = BitmapFactory.decodeResource(getResources(), R.drawable.head_d);
         bodyBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.body);
+        bodyBitmapR = BitmapFactory.decodeResource(getResources(), R.drawable.body_r);
+        bodyBitmapU = BitmapFactory.decodeResource(getResources(), R.drawable.body_u);
+        bodyBitmapD = BitmapFactory.decodeResource(getResources(), R.drawable.body_d);
         tailBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.tail);
+        tailBitmapR = BitmapFactory.decodeResource(getResources(), R.drawable.tail_r);
+        tailBitmapU = BitmapFactory.decodeResource(getResources(), R.drawable.tail_u);
+        tailBitmapD = BitmapFactory.decodeResource(getResources(), R.drawable.tail_d);
         appleBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.apple);
 
         //scales the bitmaps to match the block size
+        backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, screenWidth, screenHeight, false);
+        headBitmapR = Bitmap.createScaledBitmap(headBitmapR, blockSize, blockSize, false);
+        headBitmapU = Bitmap.createScaledBitmap(headBitmapU, blockSize, blockSize, false);
+        headBitmapD = Bitmap.createScaledBitmap(headBitmapD, blockSize, blockSize, false);
         headBitmap = Bitmap.createScaledBitmap(headBitmap, blockSize, blockSize, false);
+        bodyBitmapR = Bitmap.createScaledBitmap(bodyBitmapR, blockSize, blockSize, false);
+        bodyBitmapU = Bitmap.createScaledBitmap(bodyBitmapU, blockSize, blockSize, false);
+        bodyBitmapD = Bitmap.createScaledBitmap(bodyBitmapD, blockSize, blockSize, false);
         bodyBitmap = Bitmap.createScaledBitmap(bodyBitmap, blockSize, blockSize, false);
         tailBitmap = Bitmap.createScaledBitmap(tailBitmap, blockSize, blockSize, false);
+        tailBitmapR = Bitmap.createScaledBitmap(tailBitmapR, blockSize, blockSize, false);
+        tailBitmapU = Bitmap.createScaledBitmap(tailBitmapU, blockSize, blockSize, false);
+        tailBitmapD = Bitmap.createScaledBitmap(tailBitmapD, blockSize, blockSize, false);
         appleBitmap = Bitmap.createScaledBitmap(appleBitmap, blockSize, blockSize, false);
 
     }
