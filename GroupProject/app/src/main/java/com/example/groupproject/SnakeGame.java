@@ -217,7 +217,7 @@ public class SnakeGame extends AppCompatActivity {
                 canvas.drawBitmap(backgroundBitmap,0,0,paint);
                 paint.setColor(Color.argb(255, 255, 255, 255));
                 paint.setTextSize(topGap/2);
-                canvas.drawText("Score:" + score + "  Hi:" + hi, 10, (float)(topGap * .75), paint);
+                canvas.drawText("Score:" + score, 10, (float)(topGap * .75), paint);
                 canvas.drawText("❚❚", (float)(screenWidth * .90), (float)(topGap * .75), paint);
 
                 //draws a border
@@ -383,7 +383,7 @@ public class SnakeGame extends AppCompatActivity {
 
             switch (motionEvent.getAction() & MotionEvent.ACTION_MASK) {
                 case MotionEvent.ACTION_UP:
-                    if (motionEvent.getX() >= screenWidth * .90 && (motionEvent.getY() <= topGap * .75))
+                    if (motionEvent.getX() >= screenWidth * .85 && (motionEvent.getY() <= topGap))
                         if(paused){
                             onResume();
                             paused = false;
