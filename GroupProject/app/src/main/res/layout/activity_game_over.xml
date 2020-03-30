@@ -4,7 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="452dp"
+        android:layout_height="445dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPlayAgain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/txtGameOver"
+        app:layout_constraintVertical_bias="0.512"
+        app:srcCompat="@drawable/acorn_grn_silhouette" />
 
     <TextView
         android:id="@+id/txtGameOver"
@@ -12,6 +25,7 @@
         android:layout_height="184dp"
         android:text="Game Over"
         android:textAlignment="center"
+        android:textColor="#FFFFFF"
         android:textSize="20pt"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btnPlayAgain"
@@ -50,9 +64,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Your Score Is: "
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.389" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
