@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">The Jungle</string>
-    <string name="title">Welcome to the Jungle</string>
-    <string name="snakeButton">Snake</string>
+    <string name="app_name">Nut House</string>
+    <string name="title">Welcome to the Nut House</string>
+    <string name="snakeButton">Go Nuts!\n(Play)</string>
+    <string name="instructionButton">How To Play</string>
     <string name="gameOver">Game Over</string>
     <string name="pause">Pause</string>
     <string name="home">Home</string>

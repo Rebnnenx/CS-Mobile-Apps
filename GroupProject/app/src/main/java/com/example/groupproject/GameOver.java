@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
-
 public class GameOver extends AppCompatActivity {
 
     private Button home;
@@ -23,7 +21,7 @@ public class GameOver extends AppCompatActivity {
         Intent gameOverIntent = getIntent();
         String score = gameOverIntent.getStringExtra("Score");
 
-        Score = (TextView) findViewById(R.id.txtScore);
+        Score = (TextView) findViewById(R.id.txtInst1);
 
         Score.setText("Your score is: " + score + " Points!!");
         home = (Button) findViewById(R.id.btnHome);

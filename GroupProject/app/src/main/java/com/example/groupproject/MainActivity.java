@@ -18,4 +18,9 @@ public class MainActivity extends AppCompatActivity {
         Intent myIntent = new Intent(getBaseContext(),   SnakeGame.class);
         startActivity(myIntent);
     }
+
+    public void onInstructClick(View v){
+        Intent myIntent = new Intent(getBaseContext(),   Instruct.class);
+        startActivity(myIntent);
+    }
 }
