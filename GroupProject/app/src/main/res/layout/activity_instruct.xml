@@ -37,6 +37,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.74" />
 
+
     <Button
         android:id="@+id/btnHome"
         android:layout_width="wrap_content"
@@ -48,23 +49,21 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661" />
+        app:layout_constraintVertical_bias="0.882" />
 
     <TextView
         android:id="@+id/txtInst1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your Score Is: "
+        android:layout_width="374dp"
+        android:layout_height="413dp"
+        android:text="Goal: Your goal is to collect as many acorns with the head squirrel as you can. Each acorn gives you 10 points, as well as adds another squirrel to your line. If your line of squirrels collides with either itself or the sides of the screen, it's game over.  \n\nControls: Press the left half of the screen to rotate the squirrels 90 degrees counter-clockwise. Press the right half of the screen to rotate the squirrels 90 degrees clockwise. Press the pause button at the top right to toggle between the game being paused and the game resuming."
         android:textColor="#FFFFFF"
-        android:textSize="30sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.549" />
-
-
+        app:layout_constraintVertical_bias="0.364" />
 
     <Button
         android:id="@+id/btnPlay"

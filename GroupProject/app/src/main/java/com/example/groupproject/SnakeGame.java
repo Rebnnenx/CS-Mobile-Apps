@@ -115,7 +115,7 @@ public class SnakeGame extends AppCompatActivity {
             snakeLength = 3;
             //starts the squirrel in the middle of screen
             snakeX[0] = numBlocksWide/2;
-            snakeY[0] = numBlocksHigh /2;
+            snakeY[0] = numBlocksHigh /1;
             snakeX[1] = snakeX[0]-1;
             snakeY[1] = snakeY[0];
             snakeX[1] = snakeX[1]-1;
