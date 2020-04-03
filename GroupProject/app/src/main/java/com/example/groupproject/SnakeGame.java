@@ -66,6 +66,8 @@ public class SnakeGame extends AppCompatActivity {
     int snakeLength;
     int appleX;
     int appleY;
+    int lastAppleX;
+    int lastAppleY;
     int blockSize;
     int numBlocksWide;
     int numBlocksHigh;
@@ -123,8 +125,15 @@ public class SnakeGame extends AppCompatActivity {
         public void getApple(){
             //Creates an apple in a random spot on the canvas
             Random random = new Random();
+
             appleX = random.nextInt(numBlocksWide-1)+1;
             appleY = random.nextInt(numBlocksHigh-1)+1;
+            while((appleX == lastAppleX) && (appleY == lastAppleY)) {
+                appleX = random.nextInt(numBlocksWide-1)+1;
+                appleY = random.nextInt(numBlocksHigh-1)+1;
+            }
+            lastAppleX = appleX;
+            lastAppleY = appleY;
         }
 
         @Override
