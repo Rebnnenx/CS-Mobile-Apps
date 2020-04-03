@@ -517,7 +517,7 @@ public class SnakeGame extends AppCompatActivity {
         tailBitmapR = BitmapFactory.decodeResource(getResources(), R.drawable.tail_r);
         tailBitmapU = BitmapFactory.decodeResource(getResources(), R.drawable.tail_u);
         tailBitmapD = BitmapFactory.decodeResource(getResources(), R.drawable.tail_d);
-        appleBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.apple);
+        appleBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.acorn_sprite);
 
         //scales the bitmaps to match the block size
         backgroundBitmap = Bitmap.createScaledBitmap(backgroundBitmap, screenWidth, screenHeight, false);
@@ -533,7 +533,7 @@ public class SnakeGame extends AppCompatActivity {
         tailBitmapR = Bitmap.createScaledBitmap(tailBitmapR, blockSize, blockSize, false);
         tailBitmapU = Bitmap.createScaledBitmap(tailBitmapU, blockSize, blockSize, false);
         tailBitmapD = Bitmap.createScaledBitmap(tailBitmapD, blockSize, blockSize, false);
-        appleBitmap = Bitmap.createScaledBitmap(appleBitmap, blockSize, blockSize, false);
+        appleBitmap = Bitmap.createScaledBitmap(appleBitmap, blockSize/2, blockSize/2, false);
 
     }
 
