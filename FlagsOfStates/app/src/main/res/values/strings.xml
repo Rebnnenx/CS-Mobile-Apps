@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FlagsOfStates</string>
+    <string name="correct">Correct!</string>
+    <string name="incorrect">Incorrect</string>
+</resources>
