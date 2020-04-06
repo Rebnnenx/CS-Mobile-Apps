@@ -31,7 +31,7 @@
         android:textColor="#FFFFFF"
         android:textSize="20pt"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btnPlayAgain"
+        app:layout_constraintBottom_toTopOf="@+id/btnHome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.408"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
 
 
     <Button
-        android:id="@+id/btnHome"
+        android:id="@+id/btnPlayAgain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="serif"

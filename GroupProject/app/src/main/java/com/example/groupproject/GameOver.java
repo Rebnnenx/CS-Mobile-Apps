@@ -24,8 +24,8 @@ public class GameOver extends AppCompatActivity {
         Score = (TextView) findViewById(R.id.txtInst1);
 
         Score.setText("Your score is: " + score + " Points!!");
-        home = (Button) findViewById(R.id.btnHome);
-        playAgain = (Button) findViewById(R.id.btnPlayAgain);
+        home = (Button) findViewById(R.id.btnPlayAgain);
+        playAgain = (Button) findViewById(R.id.btnHome);
 
     }
 
