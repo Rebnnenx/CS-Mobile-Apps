@@ -4,52 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/squirrelbackground"
     tools:context=".MainActivity"
-    android:background="@color/background"
 
     >
 
     <Button
         android:id="@+id/btnInstructions"
-        android:layout_width="228dp"
-        android:layout_height="65dp"
+        android:layout_width="145dp"
+        android:layout_height="75dp"
         android:background="@color/buttonColor"
+        android:fontFamily="serif"
         android:onClick="onInstructClick"
         android:text="@string/instructionButton"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintHorizontal_bias="0.879"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.627" />
+        app:layout_constraintVertical_bias="0.948" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="serif"
+        android:shadowColor="@android:color/black"
         android:text="@string/title"
-        android:textColor="@android:color/white"
-        android:textSize="30sp"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="45sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.105" />
+        app:layout_constraintVertical_bias="0.120000005" />
 
     <Button
         android:id="@+id/btnSnake"
-        android:layout_width="228dp"
-        android:layout_height="65dp"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="145dp"
+        android:layout_height="75dp"
         android:background="@color/buttonColor"
+        android:fontFamily="serif"
         android:onClick="onSnakeClick"
         android:text="@string/snakeButton"
         android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.557"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.379" />
+        app:layout_constraintVertical_bias="0.948" />
 </androidx.constraintlayout.widget.ConstraintLayout>
