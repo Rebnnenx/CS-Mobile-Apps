@@ -43,7 +43,6 @@ public class SnakeGame extends AppCompatActivity {
     Bitmap appleBitmap;
     Bitmap backgroundBitmap;
 
-    //NOTE Replace with our new sound effects and add music?
     //initializes the sound variables
     private SoundPool soundPool;
     int appleSound = -1; //Getting apple sound effect
@@ -113,7 +112,7 @@ public class SnakeGame extends AppCompatActivity {
         public void getSnake(){
             //initializes the starting length of the squirrel
             snakeLength = 3;
-            //starts the squirrel in the middle of screen
+            //starts the squirrel in the lower middle of screen
             snakeX[0] = numBlocksWide/2;
             snakeY[0] = numBlocksHigh /1;
             snakeX[1] = snakeX[0]-1;
@@ -200,12 +199,9 @@ public class SnakeGame extends AppCompatActivity {
                 }
             }
 
-//NOTE change this method with a better one. Maybe add a game over message?
             if(dead){
                 //restarts the game
                 soundPool.play(deathSound, 1, 1, 0, 0, 1);
-                //score = 0;
-                //getSnake();
 
                 //Adding game over screen
                 String strScore = Integer.toString(score);
@@ -232,12 +228,8 @@ public class SnakeGame extends AppCompatActivity {
                 //draws a border
                 paint.setStrokeWidth(3);//4 pixel border
                 canvas.drawLine(1,topGap,screenWidth-1,topGap,paint);
-//                canvas.drawLine(screenWidth-1,topGap,screenWidth-1,topGap+(numBlocksHigh*blockSize),paint);
-//                canvas.drawLine(screenWidth-1,topGap+(numBlocksHigh*blockSize),1,topGap+(numBlocksHigh*blockSize),paint);
-//                canvas.drawLine(1,topGap, 1,topGap+(numBlocksHigh*blockSize), paint);
 
                 //0 is up, 1 is right, 2 is down, 3 is left
-
                 if(directionOfTravel == 0) {
                     canvas.drawBitmap(headBitmapU, snakeX[0]*blockSize, (snakeY[0]*blockSize)+topGap, paint);
                     for(int i = 1; i < snakeLength-1;i++){
@@ -375,7 +367,6 @@ public class SnakeGame extends AppCompatActivity {
                 ourThread.join();
             } catch (InterruptedException e) {
             }
-
         }
 
         //Resumes the game thread
@@ -385,7 +376,6 @@ public class SnakeGame extends AppCompatActivity {
             ourThread.start();
         }
 
-        //NOTE We might need to fix the game controls in this method? Doesn't work well with mouse, we need to test it on an actual phone
         //Adds the game controls
         @Override
         public boolean onTouchEvent(MotionEvent motionEvent) {
@@ -466,7 +456,6 @@ public class SnakeGame extends AppCompatActivity {
         return false;
     }
 
-    //NOTE Replace the sound effects with our own ones
     //Loads in the sounds from the resource manager
     public void loadSound(){
         soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
@@ -511,7 +500,6 @@ public class SnakeGame extends AppCompatActivity {
             numBlocksHigh = (int)blocksHigh - 1;
         }
 
-//NOTE Replace with our own images that use the same name and resolutions
         //loads and scales all of the bitmaps
         backgroundBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.background);
         headBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.head);
